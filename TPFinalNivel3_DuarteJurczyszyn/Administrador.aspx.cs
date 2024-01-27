@@ -23,7 +23,9 @@ namespace TPFinalNivel3_DuarteJurczyszyn
         }
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            string valor = ((Button)sender).CommandArgument;
+            string Id = ((Button)sender).CommandArgument;
+            Response.Redirect("ModificarArticulo.aspx?Id=" + Id);
+
         }
         protected void btnEliminar_Click(object sender, EventArgs e)
         {

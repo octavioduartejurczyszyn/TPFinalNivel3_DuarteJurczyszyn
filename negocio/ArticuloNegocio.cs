@@ -53,7 +53,24 @@ namespace negocio
 
         }
 
+        public void agregar(Articulo nuevo)
+        {
+            //AccesoDatos datos = new AccesoDatos();
+            //try
+            //{
+            //    datos.setearConsulta("Insert into POKEMONS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio)values('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "',@idTipo, @idDebilidad, @ImagenUrl, " + nuevo.Precio + ")");//ver por qué Maxi no le puso comillas a la URL
+            //    datos.setearParametro("@idTipo", nuevo.Tipo.Id);
+            //    datos.setearParametro("@idDebilidad", nuevo.Debilidad.Id);
+            //    datos.setearParametro("@urlImagen", nuevo.UrlImagen);
+            //    datos.ejecutarAccion();
 
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    throw ex;
+            //}
+        }
 
         
     }
