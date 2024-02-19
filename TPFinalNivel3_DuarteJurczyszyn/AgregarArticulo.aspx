@@ -5,8 +5,8 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row">
 
+    <div class="row">
         <div class="col-md-4">
             <div class="mb-3">
                 <label for="txtCodigo" class="form-label">Código: </label>

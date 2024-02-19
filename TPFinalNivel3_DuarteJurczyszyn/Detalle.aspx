@@ -9,6 +9,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="Row">
         <div class="Col-md-4 text-center">
             <asp:Image ID="imgArticulo" ImageUrl="https://www.palomacornejo.com/wp-content/uploads/2021/08/no-image.jpg"
@@ -28,4 +29,5 @@
             </asp:GridView>
         </div>
     </div>
+
 </asp:Content>

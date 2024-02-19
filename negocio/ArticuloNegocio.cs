@@ -23,6 +23,7 @@ namespace negocio
             {
                 datos.setearConsulta("Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria,A.ImagenUrl, A.Precio  from ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdMarca = M.Id AND A.IdCategoria = C.Id");
                 datos.ejecutarLectura();
+
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
@@ -54,7 +55,6 @@ namespace negocio
 
         public void agregar(Articulo nuevo)
         {
-            AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria,ImagenUrl, Precio)values('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', @idMarca, @idCategoria, '" + nuevo.ImagenUrl + "', " + nuevo.Precio + ")");//ver por qué Maxi no le puso comillas a la URL
@@ -67,26 +67,44 @@ namespace negocio
 
                 throw ex;
             }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
+
         public void modificarArticulo(Articulo nuevo)
         {
-            datos.setearConsulta("Update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria, ImagenUrl = @ImagenUrl, Precio = @Precio where Id = @Id");
-            datos.setearParametro("@Id", nuevo.Id);
-            datos.setearParametro("@Codigo", nuevo.Codigo);
-            datos.setearParametro("@Nombre", nuevo.Nombre);
-            datos.setearParametro("@Descripcion", nuevo.Descripcion);
-            datos.setearParametro("@IdMarca", nuevo.Marca.Id);
-            datos.setearParametro("@IdCategoria", nuevo.Categoria.Id);
-            datos.setearParametro("@ImagenUrl", nuevo.ImagenUrl);
-            datos.setearParametro("@Precio", nuevo.Precio);
+            try
+            {
+                datos.setearConsulta("Update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria, ImagenUrl = @ImagenUrl, Precio = @Precio where Id = @Id");
+                datos.setearParametro("@Id", nuevo.Id);
+                datos.setearParametro("@Codigo", nuevo.Codigo);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.setearParametro("@IdMarca", nuevo.Marca.Id);
+                datos.setearParametro("@IdCategoria", nuevo.Categoria.Id);
+                datos.setearParametro("@ImagenUrl", nuevo.ImagenUrl);
+                datos.setearParametro("@Precio", nuevo.Precio);
 
-            datos.ejecutarAccion();
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
         }
+
         public void eliminar(int id)
         {
             try
             {
-                AccesoDatos datos = new AccesoDatos();
                 datos.setearConsulta("delete from Articulos where id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
@@ -96,15 +114,19 @@ namespace negocio
             {
                 throw ex;
             }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
+
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             List<Articulo> lista = new List<Articulo>();
-            AccesoDatos datos = new AccesoDatos();
             try
             {
                 string consulta = "Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenUrl, A.Precio From ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdMarca = M.Id AND A.IdCategoria = C.Id And ";
-                 if (campo == "Categoría")
+                if (campo == "Categoría")
                 {
                     switch (criterio)
                     {
@@ -134,7 +156,7 @@ namespace negocio
                             break;
                     }
                 }
-                else 
+                else
                 {
                     switch (criterio)
                     {
@@ -177,8 +199,10 @@ namespace negocio
             {
                 throw ex;
             }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
-
-
     }
 }

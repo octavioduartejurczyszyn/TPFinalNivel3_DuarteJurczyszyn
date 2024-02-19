@@ -1,15 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TPFinalNivel3_DuarteJurczyszyn.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-        table.elemento-flotante {
-            border: 1px solid #ccc !important; /* Borde sólido */
-            border-radius: 8px !important; /* Esquinas redondeadas */
-            /* Otros estilos */
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <h1>Lista artículos</h1>
     <div class="row">
         <div class="col-6">
@@ -51,7 +45,6 @@
                     <asp:TextBox runat="server" ID="txtFiltroAvanzado" CssClass="form-control" />
                 </div>
             </div>
-
         </div>
         <div class="row">
             <div class="col-3">
@@ -62,7 +55,6 @@
         </div>
         <%} %>
     </div>
-
     <asp:GridView ID="dgvArticulos" runat="server" DataKeyNames="Id" OnSelectedIndexChanged="dgvArticulos_OnSelectedIndexChanged" CssClass="table table-bordered elemento elemento-flotante" AutoGenerateColumns="false">
         <Columns>
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />

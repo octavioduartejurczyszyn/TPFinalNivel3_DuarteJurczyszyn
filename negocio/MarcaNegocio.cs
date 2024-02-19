@@ -10,10 +10,11 @@ namespace negocio
 {
     public class MarcaNegocio
     {
-        AccesoDatos datos = new AccesoDatos();
-        List<Marca> lista = new List<Marca>();
+
         public List<Marca> listaMarca()
         {
+            AccesoDatos datos = new AccesoDatos();
+            List<Marca> lista = new List<Marca>();
             try
             {
                 datos.setearConsulta("select Id, Descripcion from Marcas");
@@ -31,14 +32,12 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
             {
                 datos.cerrarConexion();
             }
-
         }
     }
 }

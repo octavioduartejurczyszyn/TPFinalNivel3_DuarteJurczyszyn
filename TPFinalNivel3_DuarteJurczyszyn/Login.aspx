@@ -4,7 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
     <div class="row d-flex align-items-center">
         <div class="col-3 mx-auto">
             <label for="txtUsuario" class="form-label">Usuario: </label>
@@ -23,4 +22,5 @@
             <asp:Button runat="server" Text="Ingresar" CssClass="btn btn-primary" ID="btnIngresar" OnClick="btnIngresar_Click" />
         </div>
     </div>
+
 </asp:Content>

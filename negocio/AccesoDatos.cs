@@ -20,49 +20,42 @@ namespace negocio
         {
             get { return lector; }
         }
-
-        //claro aca abajo lo hacemos con constructor porque cada vez que yo llame a
-        //AccesoDatos quiero que se conecte a la DB con la que estoy trabajando.
         public AccesoDatos()
         {
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true");
             comando = new SqlCommand();
         }
-         public void setearConsulta(string consulta)
+        public void setearConsulta(string consulta)
         {
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
 
-
-        public void setearConsulta(string consulta, int Id)
-        {
-            comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = consulta + "@Id";            
-        }
+        //public void setearConsulta(string consulta, int Id)
+        //{
+        //    comando.CommandType = System.Data.CommandType.Text;
+        //    comando.CommandText = consulta + "@Id";
+        //}
 
         public void setearParametro(string nombre, object valor)
         {
             comando.Parameters.AddWithValue(nombre, valor);
         }
-        public void agregarArticulo(string consulta)
-        {
-            comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = consulta;
-        }
+
         public void ejecutarLectura()
         {
             comando.Connection = conexion;
             try
             {
-            conexion.Open();
-            lector = comando.ExecuteReader();
+                conexion.Open();
+                lector = comando.ExecuteReader();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
         public void ejecutarAccion()
         {
             comando.Connection = conexion;
@@ -76,12 +69,11 @@ namespace negocio
                 throw ex;
             }
         }
+
         public void cerrarConexion()
         {
             lector?.Close();
             conexion.Close();
         }
-
-
     }
 }
