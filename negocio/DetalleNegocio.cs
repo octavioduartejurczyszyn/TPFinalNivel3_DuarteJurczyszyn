@@ -19,8 +19,8 @@ namespace negocio
             {
                 try
                 {
-                    datos.setearConsultaDetalle("Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenURL, A.Precio  from ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdMarca = M.Id AND A.IdCategoria = C.Id AND A.Id = ", int.Parse(Id));
-
+                    datos.setearConsulta("Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenURL, A.Precio  from ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdMarca = M.Id AND A.IdCategoria = C.Id AND A.Id = @Id");
+                    datos.setearParametro("@Id", Id);
                     datos.ejecutarLectura();
 
                     while (datos.Lector.Read())

@@ -15,8 +15,11 @@ namespace TPFinalNivel3_DuarteJurczyszyn
         }
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            if (txtUsuario.Text == "admin" && txtContraseña.Text != "")
+            if (txtUsuario.Text == "admin@admin.com" && txtContraseña.Text == "admin")
+            {
+                Session.Add("admin", "admin");
                 Response.Redirect("Administrador.aspx");
+            }
         }
     }
 }

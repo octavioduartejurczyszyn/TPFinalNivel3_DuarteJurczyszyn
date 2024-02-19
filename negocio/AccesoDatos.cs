@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using dominio;
 
 namespace negocio
 {
@@ -32,17 +33,22 @@ namespace negocio
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
-        public void setearConsultaDetalle(string consulta, int Id)
+
+
+        public void setearConsulta(string consulta, int Id)
         {
             comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = consulta + " @Id";
-
-            SqlParameter parametroId = new SqlParameter("@Id", Id);
-            comando.Parameters.Add(parametroId);
+            comando.CommandText = consulta + "@Id";            
         }
+
         public void setearParametro(string nombre, object valor)
         {
             comando.Parameters.AddWithValue(nombre, valor);
+        }
+        public void agregarArticulo(string consulta)
+        {
+            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandText = consulta;
         }
         public void ejecutarLectura()
         {
@@ -56,13 +62,6 @@ namespace negocio
             {
                 throw ex;
             }
-
-
-        }
-        public void cerrarConexion()
-        {
-            lector?.Close();
-            conexion.Close();
         }
         public void ejecutarAccion()
         {
@@ -77,6 +76,12 @@ namespace negocio
                 throw ex;
             }
         }
+        public void cerrarConexion()
+        {
+            lector?.Close();
+            conexion.Close();
+        }
+
 
     }
 }

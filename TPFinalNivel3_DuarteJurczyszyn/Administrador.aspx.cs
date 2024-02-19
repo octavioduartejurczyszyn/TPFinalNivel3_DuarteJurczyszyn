@@ -11,15 +11,20 @@ namespace TPFinalNivel3_DuarteJurczyszyn
 {
     public partial class Administrador : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            if (!IsPostBack)
+            if (Session["admin"] != null && Session["admin"].ToString() == "admin")
             {
-                repRepetidor.DataSource = negocio.listar();
-                repRepetidor.DataBind();
+                if (!IsPostBack)
+                {
+                    repRepetidor.DataSource = negocio.listar();
+                    repRepetidor.DataBind();
+                }
             }
-
+            else
+                Response.Redirect("Login.aspx");
         }
         protected void btnModificar_Click(object sender, EventArgs e)
         {
@@ -29,7 +34,23 @@ namespace TPFinalNivel3_DuarteJurczyszyn
         }
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            string valor = ((Button)sender).CommandArgument;
+
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            AccesoDatos datos = new AccesoDatos();
+            string Id = ((Button)sender).CommandArgument;
+            try
+            {
+                negocio.eliminar(int.Parse(Id));
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

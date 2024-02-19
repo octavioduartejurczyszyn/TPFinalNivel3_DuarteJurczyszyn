@@ -16,34 +16,45 @@ namespace TPFinalNivel3_DuarteJurczyszyn
         {
 
             var Id = Request.QueryString != null ? Request.QueryString["Id"].ToString() : "";
+            txtId.Enabled = false;
             try
             {
-                if (!IsPostBack)
+                if (!IsPostBack && Id != null)
                 {
-                    ElementoNegocio negocio = new ElementoNegocio();
-                    List<Elemento> lista = negocio.listar();
+                    MarcaNegocio negocioMarca = new MarcaNegocio();
+                    CategoriaNegocio negocioCategoria = new CategoriaNegocio();
 
-                    ddlTipo.DataSource = lista;
-                    ddlTipo.DataValueField = "Id";
-                    ddlTipo.DataTextField = "Descripcion";
-                    ddlTipo.DataBind();
+                    List<Marca> listaMarca = negocioMarca.listaMarca();
+                    List<Categoria> listaCategoria = negocioCategoria.listaCategoria();
+                    ddlMarca.DataSource = listaMarca;
+                    ddlMarca.DataValueField = "Id";
+                    ddlMarca.DataTextField = "Descripcion";
+                    ddlMarca.DataBind();
 
-                    ddlDebilidad.DataSource = lista;
-                    ddlDebilidad.DataValueField = "Id";
-                    ddlDebilidad.DataTextField = "Descripcion";
-                    ddlDebilidad.DataBind();
+                    ddlCategoria.DataSource = listaCategoria;
+                    ddlCategoria.DataValueField = "Id";
+                    ddlCategoria.DataTextField = "Descripcion";
+                    ddlCategoria.DataBind();
                 }
-                if (Id != "")
+                if (Id != "" && !IsPostBack)
                 {
                     DetalleNegocio detalleNegocio = new DetalleNegocio();
                     Articulo seleccionado = (detalleNegocio.listar(Id))[0];
 
+                    Session.Add("articuloSeleccionado", seleccionado);
+
+                    txtId.Text = seleccionado.Id.ToString();
                     txtCodigo.Text = seleccionado.Codigo;
                     txtNombre.Text = seleccionado.Nombre;
                     txtDescripcion.Text = seleccionado.Descripcion;
-                    ddlMarca.Text = seleccionado.Marca.Descripcion;
-                    ddlCategoria.Text = seleccionado.Categoria.Descripcion;
+                    ddlMarca.SelectedValue = seleccionado.Marca.Descripcion;
+                    ddlCategoria.SelectedValue = seleccionado.Categoria.Descripcion;
+                    txtImagenUrl.Text = seleccionado.ImagenUrl;
                     txtPrecio.Text = seleccionado.Precio.ToString();
+                }
+                if (txtImagenUrl.Text != "" && txtImagenUrl.Text != null)
+                {
+                    imgArticulo.ImageUrl = txtImagenUrl.Text;
                 }
             }
             catch (Exception ex)
@@ -54,7 +65,40 @@ namespace TPFinalNivel3_DuarteJurczyszyn
         }
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            var Id = Request.QueryString["Id"].ToString();
 
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                ArticuloNegocio articulo = new ArticuloNegocio();
+                Articulo nuevo = new Articulo();
+
+                nuevo.Id = int.Parse(Id);
+                nuevo.Codigo = txtCodigo.Text;
+                nuevo.Nombre = txtNombre.Text;
+                nuevo.Descripcion = txtDescripcion.Text;
+                nuevo.Marca = new Marca();
+                nuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
+                nuevo.Categoria = new Categoria();
+                nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+                nuevo.ImagenUrl = txtImagenUrl.Text;
+                nuevo.Precio = decimal.Parse(txtPrecio.Text);
+
+                articulo.modificarArticulo(nuevo);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
+        {
+            imgArticulo.ImageUrl = txtImagenUrl.Text;
         }
     }
 }

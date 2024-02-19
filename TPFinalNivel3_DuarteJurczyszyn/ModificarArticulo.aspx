@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Tato's shop</a>
+            <a class="navbar-brand" href="Default.aspx">Tato's shop</a>
             <a class="navbar-brand" href="#">Modificar Artículo</a>
             <a class="navbar-brand" href="Login.aspx">Salir</a>
 
@@ -23,33 +23,47 @@
     </nav>
     <form id="form1" runat="server">
         <div class="container">
-            <div class="mb-3">
-                <div>
-                    <label for="txtCodigo" class="form-label">Código: </label>
-                    <asp:TextBox runat="server" class="form-control" ID="txtCodigo" />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">   
+                        <label for="txtId" class="form-label">Id: </label>
+                        <asp:TextBox runat="server" Cssclass="form-control" ID="txtId" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtCodigo" class="form-label">Código: </label>
+                        <asp:TextBox runat="server" Cssclass="form-control" ID="txtCodigo" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtNombre" class="form-label">Nombre: </label>
+                        <asp:TextBox runat="server" Cssclass="form-control" ID="txtNombre" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtDescripcion" class="form-label">Descripción: </label>
+                        <asp:TextBox runat="server" TextMode="MultiLine" Cssclass="form-control" ID="txtDescripcion" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="ddlMarca" class="form-label">Marca: </label>
+                        <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select"></asp:DropDownList>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ddlCategoria" class="form-label">Categoría: </label>
+                        <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select"></asp:DropDownList>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtPrecio" class="form-label">Precio: </label>
+                        <asp:TextBox runat="server" Cssclass="form-control" ID="txtPrecio" />
+                    </div>
+                    <div class="mb-3">
+                        <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-primary" OnClick="btnModificar_Click" />
+                    </div>
                 </div>
-                <div>
-                    <label for="txtNombre" class="form-label">Nombre: </label>
-                    <asp:TextBox runat="server" class="form-control" ID="txtNombre" />
-                </div>
-                <div>
-                    <label for="txtDescripcion" class="form-label">Descripción: </label>
-                    <asp:TextBox runat="server" class="form-control" ID="txtDescripcion" />
-                </div>
-                <div>
-                    <label for="ddlMarca" class="form-label">Marca: </label>
-                    <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select"></asp:DropDownList>
-                </div>
-                <div>
-                    <label for="ddlCategoria" class="form-label">Categoría: </label>
-                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select"></asp:DropDownList>
-                </div>
-                <div>
-                    <label for="txtPrecio" class="form-label">Precio: </label>
-                    <asp:TextBox runat="server" class="form-control" ID="txtPrecio" />
-                </div>
-                <div>
-                    <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-primary" OnClick="btnModificar_Click"/>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="txtImagenUrl" class="form-label">Url Imagen:</label>
+                        <asp:TextBox runat="server" Id ="txtImagenUrl" CssClass ="form-control" AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged"/>  
+                    </div>
+                    <asp:Image ID="imgArticulo" ImageUrl="https://www.palomacornejo.com/wp-content/uploads/2021/08/no-image.jpg"
+                        runat="server" CssClass="img-fluid mb-3" />
                 </div>
             </div>
         </div>

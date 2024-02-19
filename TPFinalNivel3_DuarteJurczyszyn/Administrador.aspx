@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPageAdministrador.Master" AutoEventWireup="true" CodeBehind="Administrador.aspx.cs" Inherits="TPFinalNivel3_DuarteJurczyszyn.Administrador" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+        function confirmarEliminar() {
+            return confirm("¿Estás seguro de que deseas eliminar?");
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -18,8 +23,8 @@
                             <p class="card-text">Marca: <%#Eval("Marca") %></p>
                             <p class="card-text">Categoría: <%#Eval("Categoria") %></p>
                             <p class="card-text">Precio: <%#Eval("Precio") %></p>
-                            <asp:button text="Modificar" cssclass="btn btn-primary" runat="server" id="btnModificar" CommandArgument='<%#Eval("Id") %>' CommandName="ArticuloId" OnClick="btnModificar_Click"/>
-                            <asp:button text="Eliminar" cssclass="btn btn-primary" runat="server" id="btnEliminar" CommandArgument='<%#Eval("Id") %>' CommandName="ArticuloId" OnClick="btnEliminar_Click"/>
+                            <asp:Button Text="Modificar" CssClass="btn btn-primary" runat="server" ID="btnModificar" CommandArgument='<%#Eval("Id") %>' CommandName="ArticuloId" OnClick="btnModificar_Click" />
+                            <asp:Button Text="Eliminar" CssClass="btn btn-primary" runat="server" ID="btnEliminar" CommandArgument='<%#Eval("Id") %>' CommandName="ArticuloId" OnClientClick="return confirmarEliminar();" OnClick="btnEliminar_Click" />
                         </div>
                     </div>
                 </div>

@@ -19,12 +19,19 @@ namespace TPFinalNivel3_DuarteJurczyszyn
             var Id = Request.QueryString["Id"] != null ? Request.QueryString["Id"].ToString() : "";
 
             DetalleNegocio detalleNegocio = new DetalleNegocio();
+            List<Articulo> articulo = detalleNegocio.listar(Id);
 
             if (Id != "")
             {
-            dgvDetalle.DataSource = detalleNegocio.listar(Id); ;
-            }            
-            dgvDetalle.DataBind();
+                dgvDetalle.DataSource = articulo;
+                dgvDetalle.DataBind();
+            }
+            foreach (Articulo aux in articulo)
+            {
+                if (aux.ImagenUrl != "" && aux.ImagenUrl != null)
+                    imgArticulo.ImageUrl = aux.ImagenUrl;
+            }
+
 
         }
     }
