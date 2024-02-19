@@ -38,8 +38,8 @@ namespace TPFinalNivel3_DuarteJurczyszyn
                 }
                 if (Id != "" && !IsPostBack)
                 {
-                    DetalleNegocio detalleNegocio = new DetalleNegocio();
-                    Articulo seleccionado = (detalleNegocio.listar(Id))[0];
+                    ArticuloNegocio detalleArticulo = new ArticuloNegocio();
+                    Articulo seleccionado = (detalleArticulo.listar(Id))[0];
 
                     Session.Add("articuloSeleccionado", seleccionado);
 

@@ -18,8 +18,8 @@ namespace TPFinalNivel3_DuarteJurczyszyn
 
             var Id = Request.QueryString["Id"] != null ? Request.QueryString["Id"].ToString() : "";
 
-            DetalleNegocio detalleNegocio = new DetalleNegocio();
-            List<Articulo> articulo = detalleNegocio.listar(Id);
+            ArticuloNegocio articuloDetalle = new ArticuloNegocio();
+            List<Articulo> articulo = articuloDetalle.listar(Id);
 
             if (Id != "")
             {
